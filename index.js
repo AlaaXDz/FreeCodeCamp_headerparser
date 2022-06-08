@@ -31,3 +31,14 @@ app.get("/api/hello", function (req, res) {
 var listener = app.listen(process.env.PORT || 3000, function () {
   console.log('Your app is listening on port ' + listener.address().port);
 });
+
+
+
+app.get("/api/whoami", function (req, res) {
+  let agent = req.headers;
+  res.json({
+    ipaddress:agent["x-forwarded-for"],
+    language:agent['accept-language'],
+    software:agent['user-agent']
+  });
+});
